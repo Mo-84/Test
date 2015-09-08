@@ -1,0 +1,95 @@
+{
+    "name": "Species",
+    "children": [
+        {
+            "name": "Morphology",
+            "children": [
+                {
+                    "family": "Mbipia",
+                    "children": [
+                        {
+                            "name": "Lutea"
+                        },
+                        {
+                            "name": "Mbipi", "group" : "fuzzy"
+                        }
+                    ]
+                },
+                {
+                    "family": "Pundamilia",
+                    "children": [
+                        {
+                            "name": "Pink"
+                        },
+                        {
+                            "name": "Nyererei", "group" : "fuzzy"
+                        },
+                        {
+                            "name": "Pundamilia", "group" : "fuzzy"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Coloration",
+            "children": [
+                {
+                    "family": "Mbipia",
+                    "children": [
+                        {
+                            "name": "Lutea"
+                        },
+                        {
+                            "name": "Nererei", "group" : "fuzzy"
+                        }
+                    ]
+                },
+                {
+                    "family": "Pundamilia",
+                    "children": [
+                        {
+                            "name": "Pink"
+                        },
+                        {
+                            "name": "Mbipi", "group" : "fuzzy"
+                        },
+                        {
+                            "name": "Pundamilia", "group" : "fuzzy"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Detection",
+            "children": [
+                {
+                    "family": "Mbipia",
+                    "children": [
+                        {
+                            "name": "Lutea"
+                        },
+                        {
+                            "name": "Nererei", "group" : "fuzzy"
+                        }
+                    ]
+                },
+                {
+                    "family": "Pundamilia",
+                    "children": [
+                        {
+                            "name": "Pink"
+                        },
+                        {
+                            "name": "Mbipi", "group" : "fuzzy"
+                        },
+                        {
+                            "name": "Pundamilia", "group" : "fuzzy"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

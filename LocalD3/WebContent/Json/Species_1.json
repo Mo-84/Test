@@ -1,0 +1,95 @@
+{
+    "name": "Species",
+    "children": [
+        {
+            "name": "Morphology",
+            "children": [
+                {
+                    "family": "Mbipia",
+                    "children": [
+                        {
+                            "name": "Lutea", "path" :{"pathA" : [[486,440], [486, 260], [620, 126]]}
+                        },
+                        {
+                            "name": "Mbipi", "group" : "fuzzy", "path" :{"pathA" : [[540,375],[486,375], [486, 260], [580, 166], [620, 206]]}
+                        }
+                    ]
+                },
+                {
+                    "family": "Pundamilia",
+                    "children": [
+                        {
+                            "name": "Pink", "path" :{"pathA" : [[420, 375],[475,375], [475, 260], [355, 140]]}
+                        },
+                        {
+                            "name": "Nyererei", "group" : "fuzzy", "path" :{"pathA" : [[420, 405],[475,405], [475, 255], [590,140], [560,110]]}
+                        },
+                        {
+                            "name": "Pundamilia", "path" :{"pathA" : [[540,405],[486,405], [486, 260], [376, 150], [316, 210]]}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Coloration",
+            "children": [
+                {
+                    "family": "Mbipia",
+                    "children": [
+                        {
+                            "name": "Lutea"
+                        },
+                        {
+                            "name": "Nererei", "group" : "fuzzy"
+                        }
+                    ]
+                },
+                {
+                    "family": "Pundamilia",
+                    "children": [
+                        {
+                            "name": "Pink", "path" :{ "pathA" : [[420, 375],[475,375], [475, 260], [355, 140]]}
+                        },
+                        {
+                            "name": "Mbipi", "group" : "fuzzy", "path" :{"pathB" : [[540,375],[486,375], [486, 260], [396, 170], [346,220]]}
+                        },
+                        {
+                            "name": "Pundamilia", "path" :{"pathB" : [[540,405],[486,405], [486, 260], [376, 150], [316, 210]]}
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Detection",
+            "children": [
+                {
+                    "family": "Mbipia",
+                    "children": [
+                        {
+                            "name": "Lutea", "path" :{"pathA" : [[486,440], [486, 260], [620, 126]]}
+                        },
+                        {
+                            "name": "Mbipi", "group" : "fuzzy", "path" :{"pathA" : [[540,375],[486,375], [486, 260], [580, 166], [620, 206]]}
+                        },
+                        {
+                            "name": "Nererei", "group" : "fuzzy",  "path" :{"pathA" : [[540,375],[486,375], [486, 260], [580, 166], [620, 206]]}
+                        }
+                    ]
+                },
+                {
+                    "family": "Pundamilia",
+                    "children": [
+                        {
+                            "name": "Pink", "path" :{"pathA" : [[420, 375],[475,375], [475, 260], [355, 140]]}
+                        },
+                        {
+                            "name": "Pundamilia", "path" :{"pathB" : [[540,405],[486,405], [486, 260], [376, 150], [316, 210]]}
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

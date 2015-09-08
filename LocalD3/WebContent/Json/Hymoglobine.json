@@ -1,0 +1,39 @@
+{
+    "name": "test",
+    "children": [
+        {
+            "name": "gender",
+            "children": [
+                {
+                    "name": "female"
+                },
+                {
+                    "name": "male"
+                }
+            ]
+        },
+        {
+            "name": "age",
+            "children": [
+                {
+                    "name": "newborn"
+                },
+                {
+                    "name": "2 - 15"
+                },
+                {
+                    "name": "16 - 50"
+                },
+                {
+                    "name": "50 - above"
+                }
+            ]
+        },
+        {
+        	"name": "hymoglobine",
+        	"children": [
+        	{"name": " 0 - 140"}, {"name" : "140-220"}, {"name" : "220 - above"}
+        	]
+        }
+    ]
+}

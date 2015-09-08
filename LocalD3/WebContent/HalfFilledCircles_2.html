@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="US-ASCII">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript" src="d3/d3.js"></script>
+<script type="text/javascript" src="d3/d3.v3.min.js"></script>
+<script type="text/javascript" src="d3/d3.min.js"></script>
+<script type="text/javascript">
+var r = 100;
+
+var svg = d3.select("body").append("svg");
+
+var grad = svg.append("defs").append("linearGradient").attr("id", "grad")
+    .attr("x1", "0%").attr("x2", "0%").attr("y1", "100%").attr("y2", "0%");
+grad.append("stop").attr("offset", "50%").style("stop-color", "lightblue");
+grad.append("stop").attr("offset", "50%").style("stop-color", "white");
+
+svg.append("circle")
+    .attr("cx", r)
+    .attr("cy", r)
+    .attr("r", r)
+    .attr("stroke", "blue")
+    .attr("fill", "url(#grad)");
+</script>
+</body>
+</html>

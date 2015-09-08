@@ -1,0 +1,69 @@
+{
+    "name": "mashrooms",
+    "children": [
+        {
+            "name": "Plants",
+            "children": [
+                {
+                    "name": "Flowers", "children": [{"name" : "Jasmine"}]
+                },
+                {
+                    "name": "Trees"
+                },
+                {
+                    "name": "Fungi", "group": "fuzzy", "children": [{"name" : "Tutu"}, {"name" : "Tree nettle"}]
+                }
+            ]
+        },
+        {
+            "name": "Animals",
+            "children": [
+                {
+                    "name": "Mammals",
+                    "children": [
+                        {
+                            "name": "Lions"
+                        },
+                        {
+                            "name": "Elephants"
+                        },
+                        {
+                            "name": "Monkeys"
+                        },
+                        {
+                            "name": "Horses"
+                        },
+                        {
+                            "name": "Bears"
+                        },
+                        {
+                            "name": "Jaguars"
+                        },
+                        {
+                            "name": "Pumas"
+                        },
+                        {
+                            "name": "Camels"
+                        },
+                        {
+                            "name": "Cats"
+                        },
+                        {
+                            "name": "Dogs"
+                        }
+                    ]
+                },
+                {
+                    "name": "Birds" , "children": [{"name" : "Swan"}, {"name" : "Duck"}, {"name" : "Turkey"}, {"name" : "Falcon"}, {"name" : "Eagle"}
+                    , {"name" : "Penguin"}]
+                },
+                {
+                    "name": "Reptiles", "children": [{"name" : "Snake"}, {"name" : "Lizard"}, {"name" : "Crocodile"}, {"name" : "Tuatara"}]
+                },
+                {
+                    "name": "Fungi", "group": "fuzzy" , "children": [{"name" : "Stinkhorn"}, {"name" : "Bracket"}]
+                }
+            ]
+        }
+    ]
+}

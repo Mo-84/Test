@@ -1,0 +1,6 @@
+source,target,value,color
+Switzerland,Cities,1.2,"red"
+Cities,Bern,1.2,"yellow"
+Cities,Zurich,1.8,"blue"
+Cities,Geneva,1,"green"
+Cities,Fribourg,1.5,"black"

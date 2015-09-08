@@ -1,0 +1,22 @@
+{
+    "name": "Animals",
+    "children": [
+        {
+            "name": "Mammals",
+            "children": [
+                {
+                    "name": "Lions"
+                },
+                {
+                    "name": "Elephants"
+                }
+            ]
+        },
+        {
+            "name": "Birds"
+        },
+        {
+            "name": "Reptiles"
+        }
+    ]
+}

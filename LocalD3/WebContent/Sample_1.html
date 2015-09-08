@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html>
+<style>
+
+circle {
+  fill: gray;
+}
+
+.leaf circle {
+  fill: red;
+  fill-opacity: .25;
+  stroke: rgb(31, 119, 180);
+  stroke-width: 1px;
+}
+
+text {
+  font: 10px sans-serif;
+}
+
+#mainSVG {
+    position:absolute;
+	top:130px;
+	left:60px;
+}
+
+#subSVG {
+    position:absolute;
+	top:130px;
+	left:791px;
+}
+
+#topDIV1 {
+    position:absolute;
+	top:57px;
+	left:20px;
+	background-color: #c0c0c0;
+}
+
+.box {
+width: 1100px;
+height: 20px;
+margin: 40px;
+float: left;
+text-align: center;
+border: #969696 solid thin;
+padding: 5px;
+}
+
+.link {
+	  fill: none;
+        stroke: #7a5230;
+        stroke-width: 3px;
+        color: brown;
+	}
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.rect {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.node1 circle{
+  fill-opacity: 1.0; 
+  stroke: rgb(31, 119, 180);
+  stroke-width: 1px;
+}
+
+.node1Parent circle{
+  cursor: pointer;
+  fill-opacity: 1.0; 
+  stroke: rgb(31, 119, 180);
+  stroke-width: 1px;
+  }
+  
+.nodeKnowledge {
+  stroke: white;
+  stroke-width: 1.5px;
+  fill-opacity: 1.0;
+}
+
+path.linkKnowledge {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+line {
+  stroke: black;
+  stroke-width: 1.5px;
+  stroke-opacity: 1.0;
+  }
+  
+.fake circle{
+  fill-opacity: 1.0; 
+  stroke: rgb(31, 119, 180);
+  stroke-width: 1px;
+}  
+  
+text {
+  fill: #000;
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+.textKnowledge {
+  fill: #000;
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+.drop {
+  background:-webkit-gradient(linear,0% 0%,0% 100%, from(rgba(13,52,58,1) ), to(rgba(255,255,255,0.6))  );
+  background: -moz-linear-gradient(top, rgba(13,52,58,1) 0%, rgba(255,255,255,.6) 100%);
+	width:1px;
+	height:9px;
+	position: absolute;
+	bottom:100px;
+	-webkit-animation: fall .63s linear ;
+  	-moz-animation: fall 2.3s  linear ;
+  
+}
+
+text {
+  fill: #000;
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+textKnowledge {
+  fill: #000;
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+marker#arrow {
+    stroke: #999;
+    fill: #999;
+}
+
+.drop {
+  background:-webkit-gradient(linear,0% 0%,0% 100%, from(rgba(13,52,58,1) ), to(rgba(255,255,255,0.6))  );
+  background: -moz-linear-gradient(top, rgba(13,52,58,1) 0%, rgba(255,255,255,.6) 100%);
+	width:1px;
+	height:9px;
+	position: absolute;
+	bottom:100px;
+	-webkit-animation: fall .63s linear ;
+  	-moz-animation: fall 2.3s  linear ;
+  
+}
+/* speed: animate the drops*/
+@-webkit-keyframes fall {
+	to {margin-top:900px;}
+}
+@-moz-keyframes fall {
+	to {margin-top:900px;}
+}
+
+#baseDIV{top:99px; left:60px; width:75%; height:30px; position:absolute; display:inline;}
+#topDIV{top:99px; left:159px; width:60%; height:30px; position:absolute; display:inline;}
+</style>
+<head>
+<meta charset="US-ASCII">
+<title>Insert title here</title>
+</head>
+<body>
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<div id ="mainSVG">
+<svg id = "packSVG" width = "730" height = "620" style = "outline: thin solid black" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs style = "opacity: 0.1">
+    <g id="Cloud">
+        <circle cx="200" cy="68" r="18" /> 
+  		<circle cx="180" cy="78" r="15"/>
+  		<circle cx="220" cy="78" r="15"/>
+    </g>
+</defs>
+</svg>
+</div>
+
+<div id ="subSVG">
+<svg id = "knowledgeSVG" width = "400" height = "620" style = "outline: thin solid black">
+<defs style = "opacity: 0.1">
+    <g id="Cloud1">
+        <circle cx="200" cy="68" r="8" /> 
+  		<circle cx="191" cy="71" r="5"/>
+  		<circle cx="209" cy="71" r="5"/>
+    </g>
+</defs>
+<defs>
+<marker id="arrow" viewbox="0 -5 10 10" refX="18" refY="0"
+        markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,-5L10,0L0,5Z">
+</marker>
+</defs>
+
+ <g>
+ 	<clipPath id="g-clip">
+      	<rect id="g-clip-rect" y="-50" height="50" x="-50" width="100">
+      	</rect>
+      </clipPath>
+      <circle clip-path="url(#g-clip)" r="47" fill="#fff" ></circle>
+    </g>
+
+</svg>
+</div>
+<script type="text/javascript" src="d3/d3.js"></script>
+<script type="text/javascript" src="d3/d3.v3.min.js"></script>
+<script type="text/javascript" src="d3/d3.min.js"></script>
+<script type="text/javascript" src="jQuery/jquery.js"></script>
+<script type="text/javascript"></script>
+<script>
+
+var diameter = 960;
+//format = d3.format(",d");
+
+var svg = d3.select("body").select("#mainSVG").select("#packSVG").append("g").attr("transform", "translate(0,0)"); //2,2;
+
+var knowledgeSvg = d3.select("body").select("#subSVG").select("#knowledgeSVG").append("g");//.attr("transform", "translate(150,50)"); //2,2;
+
+var topSVG = d3.select("body").select("#topDIV").select("#topSVG").attr("background-color","pink").append("g")
+.attr("transform", "translate(0,0)");
+
+var pack = d3.layout.pack().size([diameter - 580, diameter - 580]).value(function(d) { return d.size; });
+// Colors
+// Trees
+var mainParent = {};
+var objChild = new Object();
+//var objChildren = new Object();
+var objChildren = {};
+var childrenArray = [];
+var Tree_Position =  10;
+var mainArray = [];
+var counter = 0;
+var index;
+var instanceArray = new Array();
+var num = 0;
+var myarr = [];
+var tempArray = [];
+var id= 0,
+data = [],
+duration = 500,
+chartHeight = -5,
+chartWidth = 680;
+var elementsDepth_1 = [];
+var shiftedElements = [];
+var posRect=0; // The position of each rectangle on topDIV
+var bars;
+var rectangleAttributes;
+var moveRects = 0;
+
+//Position of clouds
+var pos = 0;
+var topPos = 0;
+var poss = 0;
+var evenOdd = 0;
+var draw;
+var cloud = new Object();
+var cloudCounter = 0;
+var cloudMove = 0;
+////////////
+//Position of Grass
+var grassPos = 10;
+var cloudArray = [];
+var smallRect;
+var selection;
+var instanceTrees = new Array();
+//knowledge graph
+ var force = d3.layout.force().charge(-3000).friction(0.6).gravity(0.6).size([400,620]).on("tick", tick);
+      		   
+var familyChild = new Array();
+      
+var graph = new Object();
+var sourceTarget = new Array();
+var nodesGraph = new Array();
+      
+var nodesGraphForce = [];//new Array();
+var sourceTargetForce = [];// new Array();
+      
+var nodesGraphSelect;
+var sourceTargetSelect;
+      
+var linkedByIndex = {};
+
+var link, node, texts;
+var linkedByIndex = {};
+var indexCounter = 0;
+var obj = {};
+var objP = {};//= new Object();
+var objLinkobjP = {}; //= new Object();
+var linksArray = [];
+var linkCounter = 0;
+var sources = {}, targets =  {};
+var boolValue = true;
+var checkChildExist = false;
+var checkParentExist = false;
+var checkTreeExist = false;
+var indexOfParent;
+var nameOfParent;
+//
+var c10 = d3.scale.category20();
+var colorNumber = 0;
+var widthRect = -360;
+
+//New Trees
+var trees = new Array();
+var treeCounter = 0;
+//Sky and Ground
+var cloud, sky, ground;
+
+var textExplain, textExplainObject;
+
+packs();
+function packs()
+{
+d3.json("Json/Mashrooms.json", function(error, root){
+	
+	sky = svg.append("rect").attr("width", "100%").attr("height", "100%")
+			 .attr("fill", "#87CEFA").attr("x",0).attr("y", 0).attr("filter","blur(4px)"); // sky 
+    ground = svg.append("rect").attr("width", "100%").attr("height", "45%").attr("fill", "#CD8162").attr("x",0).attr("y", 550).style("fill-opacity", ".8");//Ground 560
+
+	 var levels = 0; 
+	 var topLevels = 0;
+	 var pos = 0;
+	 var topPos = 0;
+	 var poss = 0;
+	 var evenOdd = 0;
+	 
+	 selection = svg.datum(root).selectAll("use").data(pack.nodes).enter().append("g");
+	 selection.filter(function(d) { if ( d.depth==0 ) {  return d.level = 0}; })
+	 selection.filter(function(d) { if ( d.depth==1 ) { topLevels ++; return d.level = topLevels;  }});
+
+	 cloud = selection.filter(function(d) { return d.depth == 0; }).append("use").attr("xlink:href","#Cloud")
+	 .attr("transform", function (d) 
+	 		{ 
+	 	     	var yPos = evenOdd%2==0 ? -40 : 20; // The positions of the clouds 20 
+	 		 	pos+=-200; 
+	 		 	evenOdd++;
+	 		 	d.x = -310+pos; // X position of the cloud on top -60+pos
+	 		 	d.y = yPos + 120; // Y position of the could on top
+	 		 	return "translate(" + ( d.x ) + "," + (d.y) +  ")"; }).on("click", clickCloud);
+
+	 
+	 selection.transition().duration(1500).attr("transform", "translate(" + 420 + ")");
+	   
+	 var textCloud = svg.append("text")
+	    .style("fill", "black")
+	    .style("font-size", "20px")
+	    //.attr("dy", ".35em")
+	    .attr("text-anchor", "middle")
+	    .attr("transform", "translate(780,110) rotate(0)")
+	    .text("Eukaryote");
+	 
+	textCloud.transition().duration(1500).attr("transform", "translate(" + 115 + "," + 110 +  ")"); //40
+	//selection.on("mouseover", showTextEukaryote).on("mouseout",removeTextEukaryote);
+});
+}
+
+function showTextEukaryote()
+{
+	textExplain = d3.select("body").select("#mainSVG").select("#packSVG").append("foreignObject")
+	  						       .attr("width", 650).attr("height", 200).attr("x", 50).attr("y", 30);
+	textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Eukaryote is any organism whose cells contain '+ 
+									'a nucleus and other organelles enclosed within membranes. There are many different types of eukaryotic cells.' + 
+									' Animals and Plants are the most familiar eukaryotes.');
+	
+	/*textExplain = svg.append('foreignObject')
+    .attr('x', 50)
+    .attr('y', 30)
+    .attr('width', 650)
+    .attr('height', 200)
+    .append("xhtml:body")
+.html('<div style="width: 690px height: 300px;">Eukaryote is any organism whose cells contain a nucleus and other organelles enclosed within membranes ' + 
+		'animals and plants are the most familiar eukaryotes, and thus provide an excellent starting point for understanding eukaryotic structure</div>')*/
+}
+
+function removeTextEukaryote()
+{
+	textExplain.remove();
+	textExplainObject.remove();
+}
+
+var treePositions = 40;// 280 19/8/2015
+var childTreeRightPosition = 400;
+var childTreeLeftPosition = 200;
+var obj;
+var sourceTarget; 
+var children;
+var childrenOfChildren = new Array();	
+var cloudClicked = false;
+function clickCloud(d)
+{ 
+	createRain(d);
+	
+	if (cloudClicked == false)
+		{
+		sky.style("opacity", 0.2).transition().style("opacity",1);
+		obj = {"name" : "cloud", "size": 30, "logo" : "Image/cloud_3.ico"};
+		nodesGraphForce.push(obj);
+		indexSource = nodesGraphForce.indexOf(obj);
+		for (var i=0; i<d.children.length; i++)
+		{
+		for (var j=0; j<d.children[i].children.length;j++)
+			{
+			if (!d.children[i].children[j].group)  // If the child is fuzzy or not
+			{
+				if (c10(colorNumber) == "#d62728" )
+					{
+					colorNumber = colorNumber + 1;
+					var color = c10(colorNumber);
+					childrenOfChildren.push({"name" : d.children[i].children[j].name, "color" : color});
+					}
+				else
+					{
+					childrenOfChildren.push({"name" : d.children[i].children[j].name, "color" : c10(colorNumber++)});
+					}
+			}
+			else // If the child is fuzzy: Mashrooms
+				{
+				var fuzzyNodePositions = {"name" : d.children[i].children[j].name, "color" : "#d62728", "group" : d.children[i].children[j].group};
+				childrenOfChildren.push(fuzzyNodePositions);
+				}
+			}
+		var colorRoot = c10(colorNumber++);
+		if (colorRoot == "#d62728")
+			{
+			colorNumber = colorNumber + 1;
+			colorRoot = c10(colorNumber);
+			children = {"name" : d.children[i].name, "children" : childrenOfChildren, "color" : colorRoot };
+			}
+		else
+			{
+			children = {"name" : d.children[i].name, "children" : childrenOfChildren, "color" : colorRoot , "depth" : d.children[i].depth};
+			}
+		obj = {"name" : d.children[i].name, "color" : colorRoot, "size" : 30, "depth" : d.children[i].depth}; // For Animals and Plants
+		nodesGraphForce.push(obj);
+		sourceTarget = nodesGraphForce.indexOf(obj);
+		sourceTargetForce.push({"source" : indexSource, "indexSource" : indexSource, "target" : sourceTarget, "indexTarget" : sourceTarget});
+		keepNodesOnTop();
+		instanceTrees.push(children);
+		trees.push(new buildTree());
+		trees[treeCounter].treePosition(treePositions);
+		trees[treeCounter].rootAndLeaves(childrenOfChildren);
+		trees[treeCounter].treeName(d.children[i].name);
+		trees[treeCounter].treeRootColor(colorRoot);
+		trees[treeCounter].drawTree(children);
+	//	var changePosition = trees[treeCounter].treePosition(treePositions) - 200; //-240
+	//	trees[treeCounter].local.transition().duration(1200).attr("transform", function(d) { return "translate(" + (changePosition) + "," + -50   + ")"});
+		trees[treeCounter].treePosition(treePositions); //changePosition
+		//alert(trees[treeCounter].position);
+  		treeCounter++;
+  		treePositions+=100; //120
+  		childrenOfChildren = [];
+		}
+		cloudClicked = true; 
+		}
+}
+
+var nbDrop = 2858; 
+function createRain(d)
+{
+	var divv = d3.select("body").select("#mainSVG").select("#packSVG").append("g").append("foreignObject")
+	  .attr("width", 100).attr("height", 600).attr("x", d.x + 560).attr("y", d.y + 110);
+	var m = divv.append("xhtml:div").append("div").attr({"class": "rain"}).attr("width", 200).attr("height", 200);
+	
+	for( var i=1; i<nbDrop; i++) 
+	{
+		var dropLeft = randRange(0,600);//1600
+		var dropTop = randRange(-1000,1400);
+		var fo = m.append("div").attr({"class": "drop", "id" : "drop" + i });
+		$('#drop'+i).css('left',dropLeft);
+		$('#drop'+i).css('top',dropTop);
+	}
+	setInterval(function() {divv.remove();},2500);
+}
+
+function randRange( minNum, maxNum) 
+{
+	return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
+}
+
+
+function buildTree()
+{
+	this.Nodestexts;
+	this.tree = d3.layout.tree().size(100,100); //400,400
+	
+	this.nodes;
+	this.nodeEnter;
+	this.nodeExit;
+	this.node;
+	this.objChildren;
+	this.name;
+	var sourcePosition ={};
+	var targetPosition = {};
+	var elbow = {};
+	this.array = [];
+	this.position;
+	this.yCoordinate;
+	this.color;
+	this.leaves = new Array();
+	this.leaves = new Array();
+	var nodePosition = new Array();
+	
+	this.treeName = function(name)
+	{
+		return this.name = name; 
+	}
+	this.treePosition =  function(Tree_Position)
+	{
+		return this.position = Tree_Position;
+	}
+	this.treeColor =  function(Tree_Color)
+	{
+		this.color = c10(Tree_Color);
+		return this.color;
+	}
+	this.rootAndLeaves = function(objChildren)
+	{
+		return this.leaves = objChildren; // returns an array that contains the root and nodes.
+	}
+	this.treeRootColor = function(color)
+	{
+		return this.color = color;
+	}
+	var fuzzyNodeLocation = function(loc)
+	{
+		//fuzzyNodePosition.push(loc);
+	}
+	
+	var YTreePosition = function(yCoordinate)
+	{
+		return this.yCoordinate = yCoordinate;
+	}
+	
+	this.local  = svg.append("g").attr("transform", function(d) { return "translate(" +  treePositions + ","  + -50  + ")"; });
+	
+	this.drawTree = function (objChildren)
+	{
+		var gap = 0;
+		var links = [];
+		var globallinks = [];
+		var localIndex = 0;
+		this.objChildren = objChildren;
+		this.nodes = this.tree.nodes(this.objChildren);
+		this.node = this.local.selectAll(".node1").data(this.nodes, function(d, i) { return d.id || (d.id = ++i); });
+		var temp;
+		var loc;
+		var locationX;
+		var locationY;
+		var fuzzyNode = new Array();
+		this.nodes.forEach(function(d) 
+				{ 
+				if (d.id == 1) 
+				{
+					d.x = 10; // The position of the root tree  
+					d.y = (610 - (d.id * 5)); // 5 is the distnace between nodes above each other
+					if (!d.parent)
+						temp = d.level;
+					this.position = Tree_Position;
+					sourcePosition = {"x":d.x, "y":d.y}; // The root's position
+					loc = d.x;
+					locx = d.x;
+					locy = d.y;
+				}
+				else 
+				{
+				if (gap==1) 
+				{
+					d.x = 38;//30 The position of each circle at the end of each curvy line of the tree
+					d.y = (578 - (d.id * 25));
+					if (d.parent !=0)
+						{
+						localIndex+=1;
+						}
+					elbow = {"x":loc, "y" : d.y};
+					targetPosition = {"x":d.x + 8, "y":d.y};
+					if (d.group)
+						{
+						fuzzyNode.push(targetPosition);
+						fuzzyNodeLocation({"name" : d.name, "x" :targetPosition.x, "y" : targetPosition.y});
+						}
+				} 
+				else if (d.depth==1)
+				{
+					d.x = -18;//10 
+					d.y = (578 - ((d.id -1) * 25));
+					if (d.parent !=0)
+						{
+					localIndex+=1;
+						}
+					elbow = {"x":loc, "y" : d.y};
+					targetPosition = {"x":d.x - 8, "y":d.y};
+					locationX = targetPosition.x; // dummy line
+					locationY = targetPosition.y; //// dummy line
+					if (d.group)
+						{
+						fuzzyNode.push(targetPosition);
+						fuzzyNodeLocation({"name" : this.treeName,  "x" :targetPosition.x, "y" : targetPosition.y});
+						}
+					gap=0;
+				}
+				links.push(sourcePosition, elbow,targetPosition, elbow, sourcePosition);
+				}
+				gap+=1;
+				});
+		localIndex = 0;
+		
+	  	this.line = d3.svg.line().interpolate("basis").x(function(d){ return d.x; }).y(function(d){return d.y; });
+	  				  
+	  	this.link = this.local.append("path").attr("class", "link").attr("d", this.line(links)).attr("stroke", "#7a5230" );
+	  	
+	  	this.nodeEnter = this.node.enter().append("g").attr("class", function(d) { return d.depth == 0 ? "node1Parent" : "node1"; })
+		//The positions of the circles from bottom to top
+		    .attr("transform", function(d) { return "translate(" + d.x  + "," + d.y + ")"; });
+	  	
+	  	var fuzzyNodes = this.nodeEnter.append("circle").style("fill", function(d) {return d.color;})
+	  				  .attr("r", function(d) {if (!d.group) return 5; else return 10;})
+	  				  .attr("filter", function(d) {if (d.group) return "blur(4px)" });
+	  	
+	  	this.nodeEnter.on("click", clickLeaf);
+	  	this.nodeEnter.on("mouseover", showRelevantTrees)
+	  			.on("mouseout", showUnRelevantTrees);
+	  	
+	  	this.node.append("title").text(function(d) { return d.depth + " " + d.name});
+	  	
+	    this.node.append("text").attr("dx", function (d) { return d.parent ? -10 : 20; }) // 30
+    			 .attr("dy", function (d) { return !d.children ? -10 : 26; })
+    			 .style("text-anchor", function (d) {  return d.children ? "end" : "start"; })
+    			 .style("font-size", function(d) {if (!d.parent) return "20px";}).text(function (d) { return d.name; });
+	}
+	
+	this.getNodeEnter = function()
+	{
+		return this.nodeEnter;
+	}
+	
+	this.getNodes =function()
+	{
+		return this.nodes;
+	}
+}
+
+function animateGrowingCircle(maxRadius, minRadius) {
+    var animateFunction = function () {
+        d3.select(this)
+            .attr('r', minRadius)
+            .attr("filter", "blur(4px)")
+            .transition()
+            .duration(1000)
+            .attr('r', maxRadius)
+            .transition()
+            .duration(1000)
+            .attr('r', minRadius)
+            .each('end', function () { d3.select(this).each(animateFunction);  });
+    };
+    return animateFunction;
+}
+
+var smallerLeaf;
+function biggerLeafOnMouseOver(d)
+{
+	for (var i=0; i<trees.length; i++)
+	{
+	for (var j=0; j<trees[i].leaves.length; j++)
+		{
+		if (d.name == trees[i].leaves[j].name)
+			{
+			smallerLeaf = trees[i].getNodeEnter().filter(function(f) {if (f.name == d.name) return f.name;}).select("circle");
+			smallerLeaf.transition(500).attr("r",20);
+			}
+		}
+	}
+}
+
+//Search for the tree where the clicked node comes from and reduce the opacity of the other trees.
+var returnArray = new Array();
+var nodeDepth = false;
+function showRelevantTrees(d)
+{
+	showTextExplainLeaf(d);
+	selection.data("Json/Mashrooms.json", function(dd) { if (dd.name == d.name) return nodeDepth = dd.depth; });
+	if ((d.depth == 0))
+		{
+		//alert(d.name + "    "  + d.depth);
+		biggerLeafOnMouseOver(d);
+		for (var i=0; i<trees.length; i++)
+			{
+			for (var j=0; j<trees[i].leaves.length; j++)
+				{
+				if (d.name != trees[i].leaves[j].name)
+				{
+				returnArray.push(trees[i]);
+				trees[i].getNodeEnter().style("opacity", 0.2);
+				sky.style("opacity", 0.2);
+				ground.style("opacity", 0.2);
+				if (nodeDepth !=1)
+					selection.style("opacity", 0.2);
+				}
+				else break;
+				}
+			}
+		}
+}
+
+//mouseout of the root
+function showUnRelevantTrees(d)
+{
+	removeTextExplainLeaf();
+	if ((d.depth == 0))
+		{
+		for (var i=0; i<returnArray.length; i++)
+			returnArray[i].getNodeEnter().style("opacity", 1);
+		sky.style("opacity", 1);
+		ground.style("opacity", 1);
+		if (nodeDepth !=1)
+			smallerLeaf.transition(500).attr("r",5);
+		selection.style("opacity", 1);
+		returnArray = [];
+		}
+	  else
+		  {
+		  }
+}
+
+function showTextExplainLeaf(d)
+{
+	textExplain = d3.select("body").select("#mainSVG").select("#packSVG").append("foreignObject")
+    .attr("width", 650).attr("height", 200).attr("x", 50).attr("y", 30);
+	switch (d.name) {
+    case "Plants":	
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Plant cells are eukaryotic cells that differ in several'+
+				' key aspects from the cells of other eukaryotic organisms. Plants contains Trees, Flowers and Fungi');
+        break; 
+    case "Animals":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Animals belong to Eukaryotic.'+
+				' An animal cell is a form of eukaryotic cell that makes up many tissues in animals. Animals contains Mammals, Reptiles, Birds and Fungi');
+        break; 
+    case "Trees":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Trees belong to Plants. A tree is a perennial plant'+
+				' with an elongated stem, or trunk, supporting branches and leaves in most species.');
+        break; 
+    case "Flowers":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Flowers belong to Plants. A flower is part of a plant that is often'+
+				' brightly colored, that usually lasts a short time, and from which the seed or fruit develops.');
+        break; 
+    case "Mammals":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Mammals belong to Animals. A mammal is any of various warm-blooded'+
+				' vertebrate animals of the class Mammalia, including humans, characterized by a covering of hair on the skin and,'+
+				' in the female, milk-producing mammary glands for nourishing the young.');
+        break;
+        
+    case "Reptiles":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Reptiles belong to Animals. A reptile is a cold-blooded vertebrate animal'+
+				' of a class that includes snakes, vertebrate animals of the class Mammalia, including humans, characterized by a covering of hair on the skin and,'+
+				' in the female, milk-producing mammary glands for nourishing the young.');
+        break;
+    case "Birds":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Birds belong to Animals. A bird is a warm-blooded egg-laying vertebrate animal.'+
+				' distinguished by the possession of feathers, wings, a beak, and typically by being able to fly.');
+        break;
+    case "Lions":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Lions belong to Mammals. The lion is one of the five big cats in the genus'+
+				' Panthera and a member of the family Felidae. The commonly used term African lion collectively denotes the several subspecies found in Africa. With some males exceeding 250 kg (550 lb) in weight.'+
+				' It is the second-largest living cat after the tiger.');
+        break;
+    case "Elephants":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Elephants belong to Mammals. The elephant is a large mammal of the family Elephantidae'+
+				'and the order Proboscidea');
+        break; 
+    case "Monkeys":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Monkeys belong to Mammals. The monkey is a haplorhine primate,'+
+				' a group generally possessing tails and consisting of approximately 260 known living species');
+        break; 
+    case "Horses":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Horses belong to Mammals. Horses are large solid-hoofed herbivorous ungulate mammals,'+
+				' a group generally possessing tails and consisting of approximately 260 known living species.');
+        break;
+    case "Jaguars":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Jaguars belong to Mammals. The jaguar is a big cat, a feline in the Panthera genus,'+
+				' and is the only extant Panthera species native to the Americas,.');
+        break;
+    case "Jaguars":
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html('Jaguars belong to Mammals. The jaguar is a big cat, a feline in the Panthera genus,'+
+				' and is the only extant Panthera species native to the Americas,.');
+        break;
+    default:     	
+		textExplainObject = textExplain.append("xhtml:div").append("div").attr("width", 690).attr("height", 300).html(d.name);
+}
+}
+//Bears are mammals of the family Ursidae. Bears are classified as caniforms, or doglike carnivorans, with the pinnipeds being their closest living relatives
+function removeTextExplainLeaf()
+{
+	//textExplain.remove();
+	textExplainObject.remove();
+}
+/*If the clicked node (leaf) has children, then a new tree will be drawn to display the node as a root and its children
+ * If the clicked node does not have children, the node will be taken to the knowledge window. 
+ */
+ 
+function clickLeaf(dd)
+{
+  // if (!dd.children) d3.select(this).select("circle").attr("visibility","hidden");		
+   var children; // to see if the clicked node has children
+   if (dd.group)
+	   {
+	   clickFuzzyNode(dd);
+	   }
+   else if (searchTrees(dd) == false)
+	   {
+   		selection.data("Json/Mashrooms.json", function(d) { if (dd.name == d.name) return children = d.children; }); 
+   		if (children)
+	   	{
+   			for (var child in children)
+				{
+				childrenOfChildren.push({"name" : children[child].name, "color" : c10(colorNumber++) });
+				}
+			children = {"name" : dd.name, "children" : childrenOfChildren, "color" : dd.color};
+			instanceTrees.push(children);
+			trees.push(new buildTree());
+			trees[treeCounter].treePosition(treePositions);
+			trees[treeCounter].rootAndLeaves(childrenOfChildren);
+			trees[treeCounter].treeName(dd.name);
+			trees[treeCounter].drawTree(children);
+			treePositions+=100; //+=120
+			childrenOfChildren = [];
+			
+			keepNodesOnTop();
+			
+			var treeParent = findParentPosition(trees[treeCounter]);
+			//alert("parent  " + treeParent.position + " current  " + trees[treeCounter].position  );
+			var distance = trees[treeCounter].position - treeParent.position;
+			if (distance > 40) 
+				{
+				distance = treeParent.position + 100;//120;
+				changeTreesPositions(trees[treeCounter], trees.indexOf(treeParent), distance);
+				}
+			treeCounter++;
+	   	}
+   	  else // If the clicked node does not have a child
+	    {
+   		if (searchChildNode(dd) == false)// && (!dd.group))
+   		{
+   			d3.select(this).select("circle").attr("visibility","hidden");
+		   	buildKnowledge(dd);
+   		}
+   		else 
+   			checkChildExist = false;
+	   	}
+	   }
+   else 
+	   checkTreeExist = false;
+}
+
+function findParentPosition(d)
+{
+	var parent;
+	selection.data("Json/Mashrooms.json", function(dd) {if ((dd.name == d.name) && (dd.parent)) {  parent = dd.parent;}});
+	for (var i=0;i<trees.length; i++)
+		{
+		if (trees[i].name == parent.name)
+			{
+			return trees[i];
+			}
+		}
+}
+
+function changeTreesPositions(newChildTree, parentTreeIndex, distance)
+{
+	var newPosisiton;
+	var counter = parentTreeIndex + 1;
+	for (counter; counter<trees.length; counter++) 
+		{
+		if ((trees[counter] !== newChildTree) && (trees[counter].position > trees[parentTreeIndex].position))
+			{
+			newPosition = trees[counter].position + 100; //+120
+			trees[counter].local.transition().duration(1200).attr("transform", function(d) { return "translate(" + newPosition  +  "," + -50   +")"; });
+			trees[counter].treePosition(newPosition);
+			}
+		if (trees[counter] === newChildTree)
+			{
+			trees[counter].local.transition().duration(1200).attr("transform", function(d) { return "translate(" + (distance)  +  "," + -30   +")"; });
+			trees[counter].treePosition(distance);
+			}
+		}
+}
+
+function clickFuzzyNode(d) //search for the parent of mashrooms in knoweldge window! 
+{
+	var obj;
+	if (searchChildNode(d) == false)
+		{
+		 if (searchParentNode(d.parent) == true)
+			 {
+			 var obj = {"name" : d.name, "size": 20, "color" : d.color, "group" : d.group};
+			 nodesGraphForce.push(obj);
+			 sourceTargetForce.push({source : indexOfParent, target: nodesGraphForce.indexOf(obj),
+					"indexSource" : indexOfParent, "indexTarget" : nodesGraphForce.indexOf(obj)});
+			 keepNodesOnTop();
+			 for (var i=0; i<trees.length; i++)
+				 {
+				 for (var j=0; j<trees[i].leaves.length; j++)
+					 {
+					 if (d.name == trees[i].leaves[j].name)
+						 {
+						 if (searchParentNode(trees[i]) == true)
+							 {
+							 sourceTargetForce.push({source : indexOfParent, target: nodesGraphForce.indexOf(obj),
+									"indexSource" : indexOfParent, "indexTarget" : nodesGraphForce.indexOf(obj)});
+							 }
+						 }
+					 }
+				 }
+			 keepNodesOnTop();
+			 knowledgeGraph();
+			 }
+		}
+}
+
+function searchTrees(d)
+{
+	for (var i=0; i<trees.length; i++)
+	   {
+	   if (d.name == trees[i].name)
+		   {
+		   checkTreeExist = true;
+		   break;
+		   }
+	   else checkTreeExist = false;
+	   }
+	return checkTreeExist;
+}
+
+function searchTreesObjects(d)
+{
+	var tree;
+	for (var i=0; i<trees.length; i++)
+	   {
+	   if (d.name == trees[i].name)
+		   {
+		   tree = trees[i];
+		   break;
+		   }
+	   }
+	return tree;
+}
+
+function searchChildNode(d)
+{
+	for (var i=0; i<nodesGraphForce.length; i++)
+	   {
+	   if (d.name == nodesGraphForce[i].name)
+		   {
+		   checkChildExist = true;
+		   break;
+		   }
+	   else checkChildExist = false;
+	   }
+	return checkChildExist;
+}
+
+function searchParentNode(d)
+{
+	for (var i=0; i<nodesGraphForce.length; i++)
+	   {
+	   if (d.name == nodesGraphForce[i].name)
+		   {
+		   checkParentExist = true;
+		   nameOfParent = nodesGraphForce[i].name;
+		   indexOfParent = nodesGraphForce.indexOf(nodesGraphForce[i]);
+		   break;
+		   }
+	   else checkParentExist = false;
+		   
+	   }
+	return checkParentExist;
+}
+
+function buildKnowledge(d)
+{
+	var findParent;
+	var indexParent;
+	
+	if (searchParentNode(d.parent) == false) // If lion's parent does not exist
+		{
+		selection.data("Json/Mashrooms.json", function(dd) {if (d.parent.name == dd.name) return findParent = dd.parent;});  // find the parent of mammal
+		
+		var obj = {"name" : d.parent.name, "size" : 20, "color" : d.parent.color, "depth" : d.depth}; // for mammal
+		nodesGraphForce.push(obj);
+		var ind = nodesGraphForce.indexOf(obj);
+		for (var i=0; i<nodesGraphForce.length; i++)
+			{
+			if (findParent.name == nodesGraphForce[i].name)
+				{
+				indexParent = nodesGraphForce.indexOf(nodesGraphForce[i]); //nodesGraphForce[i].name animals
+				sourceTargetForce.push({source : indexParent, target: ind, "indexSource" : indexParent, "indexTarget" : ind });
+				keepNodesOnTop();
+				obj = {"name" : d.name , "size" : 20, "color" : d.color};
+				nodesGraphForce.push(obj);
+				sourceTargetForce.push({source : ind, target: nodesGraphForce.indexOf(obj),
+						"indexSource" : ind, "indexTarget" : nodesGraphForce.indexOf(obj)});
+				keepNodesOnTop();
+				break;						
+				}
+			}
+		//checkParentExist = false;
+		//knowledgeGraph();
+		}
+	else
+		{
+		var obj = {"name" : d.name, "size" : 20, "color" : d.color};
+		nodesGraphForce.push(obj);
+		sourceTargetForce.push({source : indexOfParent, target: nodesGraphForce.indexOf(obj), 
+								"indexSource" : indexOfParent, "indexTarget" :nodesGraphForce.indexOf(obj) });
+		keepNodesOnTop();
+		checkParentExist = false;
+		}
+	knowledgeGraph();
+}
+
+//var nodeEnter;
+//var allNodes;
+//var allTexts, textEnter;
+function knowledgeGraph()
+{	
+	nodesGraphSelect = knowledgeSvg.selectAll(".nodeKnowledge").data(nodesGraphForce);
+	sourceTargetSelect = knowledgeSvg.selectAll(".linkKnowledge").data(sourceTargetForce);
+	texts = knowledgeSvg.selectAll(".textKnowledge").data(nodesGraphForce);
+	
+	force.nodes(nodesGraphForce).links(sourceTargetForce).start();//
+	
+	var marker = sourceTargetSelect.enter().append("line").attr("class", "linkKnowledge");//.style("marker-end", "url(#arrow)");
+	
+	var nodeEnter = nodesGraphSelect.enter().append("g").attr("class", "nodeKnowledge")
+									.call(force.drag).on("click", clickKnowledgeNode).on("mouseover", mouseOver)
+									.on("mouseout", mouseout);
+	
+	var allNodes = nodeEnter.append("circle").style("fill", function (d) {if (d.logo) return "white"; else return d.color;})
+	.attr("r", node_radius).attr("opacity",1).attr("id", function (d) { return "Node;" + d.id; }).attr("class", "nodeStrokeClass");
+	
+	var cloud = nodeEnter.append("svg:image")
+    .attr("xlink:href",  function(d) { return d.logo;})
+    .attr("x", -12)
+    .attr("y",  -12)
+    .attr("height", 40)
+    .attr("width", 40);
+	
+	var linkedByIndex = {};
+	sourceTargetSelect.forEach(function(d) {
+	linkedByIndex[d.indexSource + "," + d.indexTarget] = true;
+	});
+
+	
+  allTexts = texts.enter().append("g").attr("class", "textKnowledge");
+  
+  textEnter = allTexts.append("text")
+    .attr("x", 10)
+    .attr("y", ".35em")
+    .text(function(d) { if (d.name != "cloud") return d.name; });
+	
+	allNodes.filter(function(d) {return d.group;}).each(function(d, i) {
+			d3.select(this)
+      	      .transition()
+              .delay(i*250)
+              .each(animateGrowingCircle(15, 5))});
+	
+	nodesGraphSelect.append("title").text(function(d) { return d.name}); 
+
+	nodesGraphSelect.exit().remove();
+	sourceTargetSelect.exit().remove();
+    texts.exit().remove();
+}
+
+function isConnected(a, b) {
+	  return isConnectedAsTarget(a, b) || isConnectedAsSource(a, b) || a.index == b.index;
+	}
+
+function isConnectedAsSource(a, b) {
+	  return linkedByIndex[a.index + "," + b.index];
+	 
+	}
+
+function isConnectedAsTarget(a, b) {
+	  return linkedByIndex[b.index + "," + a.index];
+	}
+
+function isEqual(a, b) {
+	  return a.index == b.index;
+	}
+
+
+var twoNodes = [];
+function mouseOver(d)
+{
+	//if (d.name =="Lions") showTextExplainLeaf(d);
+	//showRelevantInformation(d);
+	sourceTargetSelect.transition(500)
+    .style("stroke-opacity", function(o) 
+    		{ 
+    		if (o.target === d) 
+    			{
+    			twoNodes.push(nodesGraphForce[o.target.index]); 
+    			}
+    		if (o.source === d) 
+    			{
+    			twoNodes.push(nodesGraphForce[o.source.index]);
+    			}
+    			
+      return o.source === d || o.target === d ? 1 : 0.2;})
+    .transition(500).attr("marker-end", function(o) {
+      return o.source === d || o.target === d ? "url(#arrow)" : "url()";});
+	
+	//nodesGraphSelect.transition(500)
+    //.style("opacity", function(o) { if (RelevantNodes(o) == true) return 0.2; else return 1; });
+	
+}
+// 3/7/2015
+/*var localCheck;
+function RelevantNodes(d)
+{
+	for (var i=0; i<twoNodes.length; i++)
+		{
+		//alert(twoNodes);
+		if (d !== twoNodes[i])
+			{
+			localCheck = true;
+			}
+		else {localCheck = false;};
+		}
+	return localCheck;
+}*/
+
+function mouseout(d)
+{
+	nodesGraphSelect.transition(500).style("opacity", 1);
+}
+
+function showRelevantInformation(d)
+{
+	biggerLeafOnMouseOverInformation(d);
+	for (var i=0; i<trees.length; i++)
+		{
+		for (var j=0; j<trees[i].leaves.length; j++)
+			{
+			if (d.name != trees[i].leaves[j].name)
+			{
+			returnArray.push(trees[i]);
+			trees[i].getNodeEnter().style("opacity", 0.2);
+			sky.style("opacity", 0.2);
+			ground.style("opacity", 0.2);
+			if (nodeDepth !=1)
+				selection.style("opacity", 0.2);
+			}
+			else break;
+			}
+		}
+}
+
+function biggerLeafOnMouseOverInformation(d)
+{
+	for (var i=0; i<trees.length; i++)
+	{
+	for (var j=0; j<trees[i].leaves.length; j++)
+		{
+		if (d.name == trees[i].leaves[j].name)
+			{
+			smallerLeaf = trees[i].getNodeEnter().filter(function(f) {if (f.name == d.name) return f.name;}).select("circle");
+			smallerLeaf.style("visibility","visible");
+			smallerLeaf.transition(500).attr("r",20);
+			smallerLeaf.style("opacity", 1);
+			}
+		}
+	}
+}
+
+function showUnRelevantInformation(d)
+{
+	var visibility = d3.select(this).style("visibility");
+	if (visibility == "hidden") visibility = "hidden"; else visibility = "visible";
+	for (var i=0; i<returnArray.length; i++)
+		returnArray[i].getNodeEnter().style("opacity", 1);
+	sky.style("opacity", 1);
+	ground.style("opacity", 1);
+	smallerLeaf.transition(500).attr("r",5);
+	smallerLeaf.style("visibility", visibility);
+	selection.style("opacity", 1);
+}
+
+var mashroomClicked = false;
+function clickKnowledgeNode(d)
+{
+	var mashroomChildren = [];
+	if (!d3.event.defaultPrevented) 
+	{
+	if ((d.name == "cloud") || (d.status == "fuzzy")) {}
+	else
+		{
+	if ((!d.depth) && (!d.group))
+		{
+		//if (d.parent.group)
+		//	{
+			
+		//	}
+		//else
+		removeNode(d);
+		}
+	else // if the clicked node has already children like animals, mammals, plants it has depth == 1 
+		{
+		
+		}
+		}
+	if ((d.group) && (mashroomClicked == false))
+		{
+		selection.data("Json/Mashrooms.json", function(d) { if (d.group) {mashroomChildren.push({"children" : d.children}); return mashroomChildren; }});
+		mashroomClicked = true;
+		}
+	for (var i=0; i<mashroomChildren.length; i++) 
+		{
+		for (var j=0; j<mashroomChildren[i].children.length; j++)
+			{
+			if (searchParentNode(mashroomChildren[i].children[j].parent) == true)
+				{
+				 var obj = {"name" : mashroomChildren[i].children[j].name, "size" : 20, "color" : "#d62728", "status" : "fuzzy"};
+				 nodesGraphForce.push(obj);
+				sourceTargetForce.push({source : indexOfParent, target: nodesGraphForce.indexOf(obj),
+					"indexSource" : indexOfParent, "indexTarget" : nodesGraphForce.indexOf(obj)});
+				checkParentExist = false;
+				}
+				if (searchParentNode(mashroomChildren[i].children[j].parent.parent) == true)
+					{
+						sourceTargetForce.push({source : indexOfParent, target: nodesGraphForce.indexOf(obj),
+							"indexSource" : indexOfParent, "indexTarget" : nodesGraphForce.indexOf(obj)});
+						checkParentExist = false;
+					}
+			}
+		}
+	
+	}
+	keepNodesOnTop();
+	knowledgeGraph();
+}
+
+function keepNodesOnTop() {
+    $(".nodeStrokeClass").each(function( index ) {
+        var gnode = this.parentNode;
+        gnode.parentNode.appendChild(gnode);
+    });
+}
+
+function addChildParent(child, parent)
+{	
+	sourceTargetForce.push({source : child , target : parent , "indexSource" : child, "indexTarget" : parent });
+}
+
+function tick() 
+{
+	//there	
+	//nodesGraphSelect.attr("cx", function(d) { return d.x = Math.max(1.4 * node_radius(d), Math.min(400 - (1.4 * node_radius(d)), d.x)); })
+	 //   .attr("cy", function(d) { return d.y = Math.max(1.4 * node_radius(d), Math.min(620 - (1.4 * node_radius(d)), d.y)); });   
+	
+	    sourceTargetSelect.attr("x1", function(d) { return d.source.x; })
+	    .attr("y1", function(d) { return d.source.y; })
+	  	.attr("x2", function(d) { return d.target.x; })
+	  	.attr("y2", function(d) { return d.target.y; });
+	    nodesGraphSelect.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+	    texts.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+}
+	
+function removeNode(d)
+{
+	var localLeaf = d.name;
+	var leaf = svg.selectAll("circle").filter(function (f) { if (localLeaf == f.name) return f;})
+	.attr("visibility","visible").attr("r",25).transition().duration(1500).attr("r",5);
+
+	var start;
+	var source;
+	var index = nodesGraphForce.indexOf(d);
+	nodesGraphForce.splice(index,1);
+	for (var i=0; i<sourceTargetForce.length; i++)
+		if (index == sourceTargetForce[i].target.index)
+				{
+				var targetIndex = sourceTargetForce.indexOf(sourceTargetForce[i]);
+				source = sourceTargetForce[i].source.index;
+				sourceTargetForce.splice(targetIndex,1);
+				start = i;
+				break;
+				}
+		
+		for (start ; start< sourceTargetForce.length; start++)
+			{
+			if (sourceTargetForce[start].source.index == source)
+				{
+				var newIndex = sourceTargetForce[start].target.index - 1;
+				sourceTargetForce[start].target.index = newIndex;
+				sourceTargetForce[start].indexTarget = newIndex;
+				}
+			}
+		
+	var a = [];
+	var b = [];
+	for (var i=0; i<nodesGraphForce.length; i++)
+		{
+			a.push(nodesGraphForce[i]);
+		}
+	for (var i=0; i<sourceTargetForce.length; i++)
+		{
+		b.push(sourceTargetForce[i]);
+		}
+	nodesGraphForce = [];
+	sourceTargetForce = [];
+	knowledgeGraph();
+	for (var i=0; i<a.length; i++)
+		{
+			nodesGraphForce.push(a[i]);
+		}
+	for (var i=0; i<b.length; i++)
+	{
+		sourceTargetForce.push(b[i]);
+	}
+		
+	keepNodesOnTop();
+	knowledgeGraph();
+}
+	
+function node_radius(d) { return Math.pow(40.0 * d.size, 1/3); }
+</script>
+</body>
+</html>
